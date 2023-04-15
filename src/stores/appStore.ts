@@ -5,7 +5,7 @@ export class AppStore {
     balance = 5000;
     bet = 0.25;
     outOfMoney = false;
-    playSound = true;
+    playSound = false;
     private maxBet = 16;
     private minBet = 0.25;
 
