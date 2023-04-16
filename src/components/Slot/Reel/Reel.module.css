@@ -1,0 +1,6 @@
+.Reel {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}

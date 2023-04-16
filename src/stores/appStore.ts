@@ -1,7 +1,9 @@
 import { makeAutoObservable } from "mobx";
+import { SlotStore } from "./slotStore";
 import React from "react";
 
 export class AppStore {
+    slotStore = new SlotStore();
     balance = 5000;
     bet = 0.25;
     outOfMoney = false;
@@ -28,6 +30,7 @@ export class AppStore {
     makeSpin() {
         if (this.balance > this.bet) {
             this.balance -= this.bet;
+            this.slotStore.spin();
         } else {
             this.outOfMoney = true;
         }

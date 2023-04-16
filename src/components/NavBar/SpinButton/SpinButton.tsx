@@ -13,15 +13,19 @@ const ButtonWithSound: React.FC<ButtonWithSoundProps> = withSound(({ children, .
 });
 
 export const SpinButton: React.FC = observer(function SpinButton() {
-    const { bet, decrementBet, incrementBet, makeSpin } = useAppStore();
-
+    const { bet, decrementBet, incrementBet, makeSpin, slotStore } = useAppStore();
     return (
         <div className={styles.SpinButton__wrap}>
             <ButtonWithSound soundType="bet" onClick={decrementBet} className={[styles.ArrowLeft, styles.Arrow].join(" ")}>
                 <span>-</span>
             </ButtonWithSound>
             <div className={styles.SpinButton__container}>
-                <ButtonWithSound soundType="spin" className={styles.SpinButton} onClick={makeSpin}>
+                <ButtonWithSound
+                    soundType="spin"
+                    disabled={slotStore.spinButtonDisabled}
+                    className={styles.SpinButton}
+                    onClick={makeSpin}
+                >
                     <img src={spinButtonIcon} alt="Spin button" />
                 </ButtonWithSound>
                 <span>{transformBet(bet)}</span>

@@ -1,0 +1,9 @@
+.Slot {
+    background-color: white;
+    position: absolute;
+    display: flex;
+    column-gap: 30px;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
