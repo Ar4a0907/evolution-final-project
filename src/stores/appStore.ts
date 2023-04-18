@@ -8,6 +8,7 @@ export class AppStore {
     bet = 0.25;
     outOfMoney = false;
     playSound = false;
+    audioElements: HTMLAudioElement[] = [];
     private maxBet = 16;
     private minBet = 0.25;
 
@@ -38,6 +39,10 @@ export class AppStore {
 
     toggleSound() {
        this.playSound = !this.playSound;
+    }
+
+    addAudioElements(ref: HTMLAudioElement) {
+        this.audioElements.push(ref)
     }
 }
 

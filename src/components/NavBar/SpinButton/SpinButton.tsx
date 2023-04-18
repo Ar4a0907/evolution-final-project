@@ -12,7 +12,7 @@ const ButtonWithSound: React.FC<ButtonWithSoundProps> = withSound(({ children, .
     );
 });
 
-export const SpinButton: React.FC = observer(function SpinButton() {
+export const SpinButton: React.FC = observer(() => {
     const { bet, decrementBet, incrementBet, makeSpin, slotStore } = useAppStore();
     return (
         <div className={styles.SpinButton__wrap}>

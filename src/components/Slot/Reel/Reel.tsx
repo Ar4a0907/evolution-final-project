@@ -8,7 +8,7 @@ interface ReelProps {
     index: number;
 }
 
-export const Reel: React.FC<ReelProps> = observer(function Reel(props) {
+export const Reel: React.FC<ReelProps> = observer((props) => {
     const { reel } = props;
 
     return (

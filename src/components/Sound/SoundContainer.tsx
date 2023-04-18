@@ -9,8 +9,8 @@ const BACKGROUND_MUSIC_ID = "background-music";
 export const BET_SOUND_ID = "bet-sound";
 export const SPIN_SOUND_ID = "spin-sound";
 
-export const SoundContainer: React.FC = observer(function SoundContainer() {
-    const { playSound } = useAppStore();
+export const SoundContainer: React.FC = observer(() => {
+    const { playSound, addAudioElements } = useAppStore();
     const backgroundMusicElement = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
@@ -31,8 +31,8 @@ export const SoundContainer: React.FC = observer(function SoundContainer() {
                 id={BACKGROUND_MUSIC_ID}
                 src={backgroundMusicSrc as string}
             />
-            <audio id={BET_SOUND_ID} src={betChangeSoundSrc as string} />
-            <audio id={SPIN_SOUND_ID} src={spinSoundSrc as string} />
+            <audio ref={addAudioElements} id={BET_SOUND_ID} src={betChangeSoundSrc as string} />
+            <audio ref={addAudioElements} id={SPIN_SOUND_ID} src={spinSoundSrc as string} />
         </div>
     );
 });

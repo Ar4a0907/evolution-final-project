@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import { useAppStore } from "../../../stores/appStore";
 import { transformBalance } from "../../../utils";
 
-export const Balance: React.FC = observer(function Balance() {
+export const Balance: React.FC = observer(() => {
     const { balance } = useAppStore();
 
     return(

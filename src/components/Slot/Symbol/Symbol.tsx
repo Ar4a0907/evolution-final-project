@@ -7,7 +7,7 @@ interface SymbolProps {
     symbol: string;
 }
 
-export const Symbol: React.FC<SymbolProps> = observer(function Symbol(props) {
+export const Symbol: React.FC<SymbolProps> = observer((props) => {
     const { symbol } = props;
 
     return (

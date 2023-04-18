@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import {Reel} from "./Reel/Reel";
 import {useAppStore} from "../../stores/appStore";
 
-export const Slot: React.FC = observer(function Slot() {
+export const Slot: React.FC = observer(() => {
     const { slotStore } = useAppStore();
     const { currentSymbols } = slotStore;
 

@@ -5,7 +5,7 @@ import styles from "./SoundButton.module.css";
 import soundIcon from "../../../assets/images/sound-loud.png";
 import soundIconOff from "../../../assets/images/sound-off.png";
 
-export const SoundButton: React.FC = observer(function SoundButton() {
+export const SoundButton: React.FC = observer(() => {
     const { playSound, toggleSound } = useAppStore();
 
     return (
