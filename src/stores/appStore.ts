@@ -2,13 +2,17 @@ import { makeAutoObservable } from "mobx";
 import { SlotStore } from "./slotStore";
 import React from "react";
 
+type AudioElements = {
+    [key: string]: HTMLAudioElement;
+};
+
 export class AppStore {
     slotStore = new SlotStore();
     balance = 5000;
     bet = 0.25;
     outOfMoney = false;
     playSound = false;
-    audioElements: HTMLAudioElement[] = [];
+    audioElements: AudioElements = {};
     private maxBet = 16;
     private minBet = 0.25;
 
@@ -42,7 +46,7 @@ export class AppStore {
     }
 
     addAudioElements(ref: HTMLAudioElement) {
-        this.audioElements.push(ref)
+        this.audioElements[ref.id] = ref;
     }
 }
 

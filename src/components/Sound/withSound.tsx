@@ -1,5 +1,4 @@
 import React from "react";
-import {BET_SOUND_ID, SPIN_SOUND_ID} from "./SoundContainer";
 import {observer} from "mobx-react";
 import {useAppStore} from "../../stores/appStore";
 
@@ -17,9 +16,7 @@ export function withSound<P extends WithSoundProps>(Component: React.FC<P>): Rea
         const { audioElements } = useAppStore();
 
         const playSound = React.useCallback(() => {
-            const audioElement = audioElements.find(element => soundType === "bet" ?
-                element.id === BET_SOUND_ID :
-                element.id === SPIN_SOUND_ID);
+            const audioElement = audioElements[`${soundType}-sound`]
 
             if (audioElement !== null && audioElement !== undefined) {
                 audioElement.play();
