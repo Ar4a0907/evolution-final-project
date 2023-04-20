@@ -1,9 +1,18 @@
 import { makeAutoObservable } from "mobx";
 
+type Reels = {
+    [key: string]: HTMLDivElement | number;
+};
+
 export class SlotStore {
-    spinButtonDisabled = false;
-    currentSymbols = this.generateNewSymbols()
-    nextSymbols = this.generateNewSymbols()
+    isSpinning = false;
+    currentSymbols = this.generateNewSymbols();
+    nextSymbols = this.generateNewSymbols();
+    reels:Reels = {};
+
+    constructor() {
+        makeAutoObservable(this, {}, { autoBind: true });
+    }
 
     generateNewSymbols() {
         return [
@@ -22,6 +31,7 @@ export class SlotStore {
             "q",
             "k",
             "a",
+            "coin",
             "samurai",
             "geisha",
             "wild",
@@ -33,25 +43,50 @@ export class SlotStore {
     }
 
     onSpinStart() {
-        this.spinButtonDisabled = true;
+        this.isSpinning = true;
     }
 
     onSpinEnd() {
         //Calculate win
-        this.spinButtonDisabled = false;
+        this.isSpinning = false;
     }
 
-    spin() {
-        this.currentSymbols = this.nextSymbols;
-        this.nextSymbols = this.generateNewSymbols()
+    factor(index: number) {
+        return 1 + Math.pow(index / 2, 2);
+    }
 
+    generateRandomSymbols(index = 0) {
+        const iterator = (1 + index) * 3;
+        const symbolArray = [];
+        for (let i = 0; i < iterator; i++) {
+            symbolArray.push(this.randomSymbol());
+        }
+        return symbolArray;
+    }
+
+    animationPromise() {
+        return new Promise((resolve) =>
+            setTimeout(resolve, 1000)
+        );
+    }
+
+
+    async spin() {
         this.onSpinStart();
-        //Add Reel Animation Promise
-        this.onSpinEnd();
+        const promise = this.animationPromise()
+
+        promise.then((result) => {
+            console.log(result)
+            this.onSpinEnd();
+            this.currentSymbols = this.nextSymbols;
+            this.nextSymbols = this.generateNewSymbols()
+        })
     }
 
-    constructor() {
-        makeAutoObservable(this, {}, { autoBind: true });
+    addReelsElements(ref: HTMLDivElement) {
+        if (ref !== null) {
+            this.reels[ref.id] = ref;
+        }
     }
 }
 

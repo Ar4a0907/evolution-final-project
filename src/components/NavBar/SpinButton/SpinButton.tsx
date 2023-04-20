@@ -22,7 +22,7 @@ export const SpinButton: React.FC = observer(() => {
             <div className={styles.SpinButton__container}>
                 <ButtonWithSound
                     soundType="spin"
-                    disabled={slotStore.spinButtonDisabled}
+                    disabled={slotStore.isSpinning}
                     className={styles.SpinButton}
                     onClick={makeSpin}
                 >

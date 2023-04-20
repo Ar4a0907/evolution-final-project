@@ -6,11 +6,17 @@ import {useAppStore} from "../../stores/appStore";
 
 export const Slot: React.FC = observer(() => {
     const { slotStore } = useAppStore();
-    const { currentSymbols } = slotStore;
+    const { currentSymbols, nextSymbols } = slotStore;
 
     return (
         <div className={styles.Slot}>
-            {currentSymbols.map((reel, index) => <Reel key={index} reel={reel} index={index}/>)}
+            {currentSymbols.map((reel, index) => (
+                <Reel
+                    key={index}
+                    reel={reel}
+                    index={index}
+                    nextSymbols={nextSymbols[index]}
+                />))}
         </div>
     );
 });

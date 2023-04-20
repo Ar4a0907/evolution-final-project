@@ -46,7 +46,9 @@ export class AppStore {
     }
 
     addAudioElements(ref: HTMLAudioElement) {
-        this.audioElements[ref.id] = ref;
+        if (ref !== null) {
+            this.audioElements[ref.id] = ref;
+        }
     }
 }
 
