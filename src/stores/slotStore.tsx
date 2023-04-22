@@ -48,6 +48,8 @@ export class SlotStore {
 
     onSpinEnd() {
         //Calculate win
+        this.currentSymbols = this.nextSymbols;
+        this.nextSymbols = this.generateNewSymbols()
         this.isSpinning = false;
     }
 
@@ -66,7 +68,7 @@ export class SlotStore {
 
     animationPromise() {
         return new Promise((resolve) =>
-            setTimeout(resolve, 1000)
+            setTimeout(resolve, 5000)
         );
     }
 
@@ -75,11 +77,8 @@ export class SlotStore {
         this.onSpinStart();
         const promise = this.animationPromise()
 
-        promise.then((result) => {
-            console.log(result)
+        promise.then(() => {
             this.onSpinEnd();
-            this.currentSymbols = this.nextSymbols;
-            this.nextSymbols = this.generateNewSymbols()
         })
     }
 

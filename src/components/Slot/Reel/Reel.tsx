@@ -15,7 +15,14 @@ export const Reel: React.FC<ReelProps> = observer((props) => {
     const { slotStore } = useAppStore();
 
     return (
-        <div ref={slotStore.addReelsElements} id={`reel-${index}`} className={styles.Reel}>
+        <div
+            ref={slotStore.addReelsElements}
+            id={`reel-${index}`}
+            className={slotStore.isSpinning ? [styles.Reel, styles.isSpinning].join(" ") : styles.Reel }
+            style={{
+                '--spin-duration': `${slotStore.factor(index)}s`
+            } as React.CSSProperties}
+        >
             {reel.map((symbol, index) => <Symbol key={index} symbol={symbol}/>)}
             {slotStore.isSpinning ?
                 slotStore.generateRandomSymbols(index).map((symbol, index) => <Symbol key={index} symbol={symbol}/>)
