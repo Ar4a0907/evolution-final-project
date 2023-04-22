@@ -16,6 +16,7 @@ export const Slot: React.FC = observer(() => {
                     reel={reel}
                     index={index}
                     nextSymbols={nextSymbols[index]}
+                    lastItem={ index === currentSymbols.length - 1 }
                 />))}
         </div>
     );

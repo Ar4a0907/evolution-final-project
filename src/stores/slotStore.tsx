@@ -1,14 +1,11 @@
 import { makeAutoObservable } from "mobx";
 
-type Reels = {
-    [key: string]: HTMLDivElement | number;
-};
-
 export class SlotStore {
     isSpinning = false;
     currentSymbols = this.generateNewSymbols();
     nextSymbols = this.generateNewSymbols();
-    reels:Reels = {};
+    animationResolve: (() => void) | undefined = undefined;
+    animationPromise: Promise<void> | undefined;
 
     constructor() {
         makeAutoObservable(this, {}, { autoBind: true });
@@ -26,11 +23,11 @@ export class SlotStore {
 
     get symbols() {
         return [
-            "10",
-            "j",
-            "q",
-            "k",
-            "a",
+            "helmet",
+            "pagoda",
+            "sai",
+            "sunrise",
+            "yin",
             "coin",
             "samurai",
             "geisha",
@@ -66,26 +63,25 @@ export class SlotStore {
         return symbolArray;
     }
 
-    animationPromise() {
-        return new Promise((resolve) =>
-            setTimeout(resolve, 5000)
-        );
-    }
-
-
-    async spin() {
-        this.onSpinStart();
-        const promise = this.animationPromise()
-
-        promise.then(() => {
-            this.onSpinEnd();
+    onAnimationStart = () => {
+        this.animationPromise = new Promise<void>(resolve => {
+            this.animationResolve = resolve;
         })
     }
 
-    addReelsElements(ref: HTMLDivElement) {
-        if (ref !== null) {
-            this.reels[ref.id] = ref;
+    onAnimationEnd = () => {
+        if (this.animationResolve !== undefined) {
+            this.animationResolve();
         }
+    };
+
+    spin() {
+        this.onSpinStart();
+        this.onAnimationStart();
+
+        this.animationPromise?.then(() => {
+            this.onSpinEnd();
+        })
     }
 }
 
