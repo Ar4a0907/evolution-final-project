@@ -16,7 +16,12 @@ export const SpinButton: React.FC = observer(() => {
     const { bet, decrementBet, incrementBet, makeSpin, slotStore } = useAppStore();
     return (
         <div className={styles.SpinButton__wrap}>
-            <ButtonWithSound soundType="bet" onClick={decrementBet} className={[styles.ArrowLeft, styles.Arrow].join(" ")}>
+            <ButtonWithSound
+                soundType="bet"
+                disabled={slotStore.isSpinning}
+                onClick={decrementBet}
+                className={[styles.ArrowLeft, styles.Arrow].join(" ")}
+            >
                 <span>-</span>
             </ButtonWithSound>
             <div className={styles.SpinButton__container}>
@@ -30,7 +35,12 @@ export const SpinButton: React.FC = observer(() => {
                 </ButtonWithSound>
                 <span>{transformBet(bet)}</span>
             </div>
-            <ButtonWithSound soundType="bet" onClick={incrementBet} className={[styles.ArrowRight, styles.Arrow].join(" ")}>
+            <ButtonWithSound
+                soundType="bet"
+                disabled={slotStore.isSpinning}
+                onClick={incrementBet}
+                className={[styles.ArrowRight, styles.Arrow].join(" ")}
+            >
                 <span>+</span>
             </ButtonWithSound>
         </div>

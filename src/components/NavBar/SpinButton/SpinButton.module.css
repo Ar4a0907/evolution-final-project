@@ -32,11 +32,11 @@
     height: auto;
 }
 
-.SpinButton:hover, .SpinButton:disabled {
+.SpinButton:hover, .SpinButton:disabled, .Arrow:disabled {
     background-color: rgb(34, 61, 108);
 }
 
-.SpinButton:disabled {
+.SpinButton:disabled, .Arrow:disabled {
     cursor: not-allowed;
 }
 
