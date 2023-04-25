@@ -1,14 +1,19 @@
 import { makeAutoObservable } from "mobx";
+import { AppStore } from "./appStore";
 
 export class SlotStore {
+    appStore;
+    winLines = 5;
     isSpinning = false;
     currentSymbols = this.generateNewSymbols();
     nextSymbols = this.generateNewSymbols();
     animationResolve: (() => void) | undefined = undefined;
     animationPromise: Promise<void> | undefined;
+    win = 0;
 
-    constructor() {
+    constructor(appStore: AppStore) {
         makeAutoObservable(this, {}, { autoBind: true });
+        this.appStore = appStore;
     }
 
     generateNewSymbols() {
@@ -41,6 +46,7 @@ export class SlotStore {
 
     calculateWin() {
         const checkLines = this.createCheckLines();
+        let win = 0;
         for (let i = 0; i < checkLines.length; i++) {
             let count = 0;
             let winningSymbol = checkLines[i][0];
@@ -55,8 +61,10 @@ export class SlotStore {
                     break;
                 }
             }
-            console.log(this.calculateWinAmount(winningSymbol, count))
+            win = win + this.calculateWinAmount(winningSymbol, count)
         }
+
+        this.win = win * this.appStore.bet;
     }
 
     createCheckLines() {
@@ -90,15 +98,15 @@ export class SlotStore {
 
     calculateWinAmount(symbol: string, count: number) {
         const payouts: {[key: string]: number[]} = {
-            helmet: [0, 0, 10, 20, 50],
-            pagoda: [0, 0, 10, 20, 50],
-            sai: [0, 0, 10, 20, 50],
-            sunrise: [0, 0, 20, 50, 100],
-            yin: [0, 0, 20, 50, 100],
-            coin: [0, 0, 50, 100, 200],
-            samurai: [0, 50, 100, 200, 500],
-            geisha: [0, 100, 200, 500, 1000],
-            wild: [0, 0, 0, 0, 2000],
+            helmet: [0, 0, 1, 2, 5],
+            pagoda: [0, 0, 1, 2, 5],
+            sai: [0, 0, 1, 2, 5],
+            sunrise: [0, 0, 2, 5, 10],
+            yin: [0, 0, 2, 5, 10],
+            coin: [0, 0, 5, 10, 20],
+            samurai: [0, 1, 5, 20, 50],
+            geisha: [0, 2, 10, 40, 100],
+            wild: [0, 0, 0, 0, 200],
         };
 
         return payouts[symbol][count];
@@ -106,10 +114,12 @@ export class SlotStore {
 
     onSpinStart() {
         this.isSpinning = true;
+        this.win = 0;
     }
 
     onSpinEnd() {
         this.calculateWin();
+        this.appStore.incrementBalance(this.win);
         this.currentSymbols = this.nextSymbols;
         this.nextSymbols = this.generateNewSymbols()
         this.isSpinning = false;

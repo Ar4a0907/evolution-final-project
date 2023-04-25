@@ -7,7 +7,7 @@ type AudioElements = {
 };
 
 export class AppStore {
-    slotStore = new SlotStore();
+    slotStore = new SlotStore(this);
     balance = 5000;
     bet = 0.25;
     outOfMoney = false;
@@ -30,6 +30,10 @@ export class AppStore {
         if (this.bet > this.minBet) {
             this.bet = this.bet / 2;
         }
+    }
+
+    incrementBalance(money: number) {
+        this.balance += money;
     }
 
     makeSpin() {
