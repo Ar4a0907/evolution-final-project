@@ -1,6 +1,7 @@
 import React from "react";
-import {observer} from "mobx-react";
-import {useAppStore} from "../../stores/appStore";
+import { observer } from "mobx-react";
+
+import { useAppStore } from "../../stores/appStore";
 
 interface WithSoundProps {
     soundType: "spin" | "bet";
@@ -12,11 +13,11 @@ export type ButtonWithSoundProps =
     React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export function withSound<P extends WithSoundProps>(Component: React.FC<P>): React.FC<P> {
-    const ButtonWithSound: React.FC<P> = observer(({soundType, onClick, ...props}) => {
-        const {audioElements} = useAppStore();
+    const ButtonWithSound: React.FC<P> = observer(({ soundType, onClick, ...props }) => {
+        const { audioElements } = useAppStore();
 
         const playSound = React.useCallback(() => {
-            const audioElement = audioElements[`${soundType}-sound`]
+            const audioElement = audioElements[`${ soundType }-sound`];
 
             if (audioElement !== null && audioElement !== undefined) {
                 audioElement.play();
@@ -30,7 +31,7 @@ export function withSound<P extends WithSoundProps>(Component: React.FC<P>): Rea
             playSound();
         }, [onClick, playSound]);
 
-        return <Component {...props as P} onClick={handleClick}/>;
+        return <Component { ...props as P } onClick={ handleClick }/>;
     });
 
     return ButtonWithSound;

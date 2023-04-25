@@ -1,16 +1,20 @@
 import React from "react";
-import {observer} from "mobx-react";
-import {useAppStore} from "../../../stores/appStore";
+import { observer } from "mobx-react";
+
+import { useAppStore } from "../../../stores/appStore";
+import { transformBalance } from "../../../utils";
+
+
 import styles from "./WinCounter.module.css";
-import {transformBalance} from "../../../utils";
+
 
 export const WinCounter: React.FC = observer(() => {
-    const {slotStore} = useAppStore()
+    const { slotStore } = useAppStore();
 
     return (
-        <div className={styles.WinCounter}>
+        <div className={ styles.WinCounter }>
             <p>Win:</p>
-            <p>{transformBalance(slotStore.win)}</p>
+            <p>{ transformBalance(slotStore.win) }</p>
         </div>
     );
 });

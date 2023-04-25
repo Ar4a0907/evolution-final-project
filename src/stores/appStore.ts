@@ -1,6 +1,7 @@
-import {makeAutoObservable} from "mobx";
-import {SlotStore} from "./slotStore";
+import { makeAutoObservable } from "mobx";
 import React from "react";
+
+import { SlotStore } from "./slotStore";
 
 type AudioElements = {
     [key: string]: HTMLAudioElement;
@@ -17,7 +18,7 @@ export class AppStore {
     private minBet = 0.25;
 
     constructor() {
-        makeAutoObservable(this, {}, {autoBind: true});
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     incrementBet() {

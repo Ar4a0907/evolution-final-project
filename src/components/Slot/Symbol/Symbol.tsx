@@ -1,6 +1,5 @@
+import { observer } from "mobx-react";
 import React from "react";
-import styles from "./Symbol.module.css";
-import {observer} from "mobx-react";
 
 import coin from "../../../assets/images/slot-icons/coin.png";
 import geisha from "../../../assets/images/slot-icons/geisha.png";
@@ -12,11 +11,14 @@ import sunrise from "../../../assets/images/slot-icons/sunrise.png";
 import wild from "../../../assets/images/slot-icons/wild.png";
 import yin from "../../../assets/images/slot-icons/yin.png";
 
+
+import styles from "./Symbol.module.css";
+
 interface SymbolProps {
     symbol: string;
 }
 
-const images: { [key: string]: '*.png' } = {
+const images: { [key: string]: "*.png" } = {
     coin,
     geisha,
     helmet,
@@ -25,15 +27,15 @@ const images: { [key: string]: '*.png' } = {
     samurai,
     sunrise,
     wild,
-    yin
+    yin,
 };
 
 export const Symbol: React.FC<SymbolProps> = observer((props) => {
-    const {symbol} = props;
+    const { symbol } = props;
 
     return (
-        <div className={styles.Symbol}>
-            <img src={images[symbol]} alt={symbol}/>
+        <div className={ styles.Symbol }>
+            <img src={ images[symbol] } alt={ symbol }/>
         </div>
     );
 });

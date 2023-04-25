@@ -1,5 +1,7 @@
-import {makeAutoObservable} from "mobx";
-import {AppStore} from "./appStore";
+import { makeAutoObservable } from "mobx";
+
+import { AppStore } from "./appStore";
+
 
 export class SlotStore {
     appStore;
@@ -12,7 +14,7 @@ export class SlotStore {
     win = 0;
 
     constructor(appStore: AppStore) {
-        makeAutoObservable(this, {}, {autoBind: true});
+        makeAutoObservable(this, {}, { autoBind: true });
         this.appStore = appStore;
     }
 
@@ -61,7 +63,7 @@ export class SlotStore {
                     break;
                 }
             }
-            win = win + this.calculateWinAmount(winningSymbol, count)
+            win = win + this.calculateWinAmount(winningSymbol, count);
         }
 
         this.win = win * this.appStore.bet;
@@ -82,16 +84,16 @@ export class SlotStore {
             this.nextSymbols[1][1],
             this.nextSymbols[2][2],
             this.nextSymbols[3][1],
-            this.nextSymbols[4][0]
-        ])
+            this.nextSymbols[4][0],
+        ]);
 
         lines.push([
             this.nextSymbols[0][2],
             this.nextSymbols[1][1],
             this.nextSymbols[2][0],
             this.nextSymbols[3][1],
-            this.nextSymbols[4][2]
-        ])
+            this.nextSymbols[4][2],
+        ]);
 
         return lines;
     }
@@ -121,7 +123,7 @@ export class SlotStore {
         this.calculateWin();
         this.appStore.incrementBalance(this.win);
         this.currentSymbols = this.nextSymbols;
-        this.nextSymbols = this.generateNewSymbols()
+        this.nextSymbols = this.generateNewSymbols();
         this.isSpinning = false;
     }
 
@@ -141,8 +143,8 @@ export class SlotStore {
     onAnimationStart = () => {
         this.animationPromise = new Promise<void>(resolve => {
             this.animationResolve = resolve;
-        })
-    }
+        });
+    };
 
     onAnimationEnd = () => {
         if (this.animationResolve !== undefined) {
@@ -155,7 +157,7 @@ export class SlotStore {
         this.onAnimationStart();
         this.animationPromise?.then(() => {
             this.onSpinEnd();
-        })
+        });
     }
 }
 
