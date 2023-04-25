@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Slot.module.css";
-import {observer} from "mobx-react";
-import {Reel} from "./Reel/Reel";
-import {useAppStore} from "../../stores/appStore";
+import { observer } from "mobx-react";
+import { Reel } from "./Reel/Reel";
+import { useAppStore } from "../../stores/appStore";
 
 export const Slot: React.FC = observer(() => {
     const { slotStore } = useAppStore();

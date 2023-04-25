@@ -1,6 +1,6 @@
 import React from "react";
-import {observer} from "mobx-react";
-import {useAppStore} from "../../stores/appStore";
+import { observer } from "mobx-react";
+import { useAppStore } from "../../stores/appStore";
 
 interface WithSoundProps {
     soundType: "spin" | "bet";

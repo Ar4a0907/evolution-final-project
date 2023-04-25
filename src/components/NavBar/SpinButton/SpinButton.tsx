@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useAppStore } from "../../../stores/appStore";
 import spinButtonIcon from "../../../assets/images/circular-arrow.svg";
 import { transformBet } from "../../../utils";
-import {ButtonWithSoundProps, withSound} from "../../Sound/withSound";
+import { ButtonWithSoundProps, withSound } from "../../Sound/withSound";
 
 const ButtonWithSound: React.FC<ButtonWithSoundProps> = withSound(({ children, ...props }) => {
     return (

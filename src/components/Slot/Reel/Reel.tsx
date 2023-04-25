@@ -1,8 +1,9 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Reel.module.css";
-import {observer} from "mobx-react";
-import {Symbol} from "../Symbol/Symbol";
-import {useAppStore} from "../../../stores/appStore";
+import { observer } from "mobx-react";
+import { Symbol } from "../Symbol/Symbol";
+import { useAppStore } from "../../../stores/appStore";
+import { REEL_SPIN_END_ID } from "../../Sound/SoundContainer";
 
 interface ReelProps {
     reel: string[];
@@ -13,8 +14,12 @@ interface ReelProps {
 
 export const Reel: React.FC<ReelProps> = observer((props) => {
     const { reel, index, nextSymbols, lastItem } = props;
-    const { slotStore } = useAppStore();
+    const { slotStore, audioElements } = useAppStore();
     const reelRef = useRef<HTMLDivElement>(null);
+
+    const playSound = () => {
+        audioElements[REEL_SPIN_END_ID].play();
+    }
 
     useEffect(() => {
         const reelRefCurrent = reelRef.current;
@@ -23,10 +28,13 @@ export const Reel: React.FC<ReelProps> = observer((props) => {
             reelRefCurrent.addEventListener('animationend', slotStore.onAnimationEnd);
         }
 
+        reelRefCurrent?.addEventListener('animationend', playSound)
+
         return () => {
             if (reelRefCurrent !== null && lastItem) {
                 reelRefCurrent.removeEventListener('animationend', slotStore.onAnimationEnd);
             }
+            reelRefCurrent?.removeEventListener('animationend', playSound)
         };
     });
 

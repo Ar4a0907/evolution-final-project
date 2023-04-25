@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Game.module.css";
-import {NavBar} from "../NavBar/NavBar";
-import {Slot} from "../Slot/Slot";
+import { NavBar } from "../NavBar/NavBar";
+import { Slot } from "../Slot/Slot";
 
 export const Game: React.FC = () => {
     return (

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Symbol.module.css";
-import {observer} from "mobx-react";
+import { observer } from "mobx-react";
 
 import coin from "../../../assets/images/slot-icons/coin.png";
 import geisha from "../../../assets/images/slot-icons/geisha.png";
