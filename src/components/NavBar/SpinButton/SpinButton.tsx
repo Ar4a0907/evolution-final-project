@@ -1,19 +1,19 @@
 import React from "react";
 import styles from "./SpinButton.module.css";
-import { observer } from "mobx-react";
-import { useAppStore } from "../../../stores/appStore";
+import {observer} from "mobx-react";
+import {useAppStore} from "../../../stores/appStore";
 import spinButtonIcon from "../../../assets/images/circular-arrow.svg";
-import { transformBet } from "../../../utils";
-import { ButtonWithSoundProps, withSound } from "../../Sound/withSound";
+import {transformBet} from "../../../utils";
+import {ButtonWithSoundProps, withSound} from "../../Sound/withSound";
 
-const ButtonWithSound: React.FC<ButtonWithSoundProps> = withSound(({ children, ...props }) => {
+const ButtonWithSound: React.FC<ButtonWithSoundProps> = withSound(({children, ...props}) => {
     return (
         <button {...props}>{children}</button>
     );
 });
 
 export const SpinButton: React.FC = observer(() => {
-    const { bet, decrementBet, incrementBet, makeSpin, slotStore } = useAppStore();
+    const {bet, decrementBet, incrementBet, makeSpin, slotStore} = useAppStore();
     return (
         <div className={styles.SpinButton__wrap}>
             <ButtonWithSound
@@ -31,7 +31,7 @@ export const SpinButton: React.FC = observer(() => {
                     className={styles.SpinButton}
                     onClick={makeSpin}
                 >
-                    <img src={spinButtonIcon} alt="Spin button" />
+                    <img src={spinButtonIcon} alt="Spin button"/>
                 </ButtonWithSound>
                 <span>{transformBet(bet)}</span>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Symbol.module.css";
-import { observer } from "mobx-react";
+import {observer} from "mobx-react";
 
 import coin from "../../../assets/images/slot-icons/coin.png";
 import geisha from "../../../assets/images/slot-icons/geisha.png";
@@ -16,7 +16,7 @@ interface SymbolProps {
     symbol: string;
 }
 
-const images: { [key: string ]: '*.png'} = {
+const images: { [key: string]: '*.png' } = {
     coin,
     geisha,
     helmet,
@@ -29,7 +29,7 @@ const images: { [key: string ]: '*.png'} = {
 };
 
 export const Symbol: React.FC<SymbolProps> = observer((props) => {
-    const { symbol } = props;
+    const {symbol} = props;
 
     return (
         <div className={styles.Symbol}>

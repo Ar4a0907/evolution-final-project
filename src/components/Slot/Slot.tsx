@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./Slot.module.css";
-import { observer } from "mobx-react";
-import { Reel } from "./Reel/Reel";
-import { useAppStore } from "../../stores/appStore";
+import {observer} from "mobx-react";
+import {Reel} from "./Reel/Reel";
+import {useAppStore} from "../../stores/appStore";
 
 export const Slot: React.FC = observer(() => {
-    const { slotStore } = useAppStore();
-    const { currentSymbols, nextSymbols } = slotStore;
+    const {slotStore} = useAppStore();
+    const {currentSymbols, nextSymbols} = slotStore;
 
     return (
         <div className={styles.Slot}>
@@ -16,7 +16,7 @@ export const Slot: React.FC = observer(() => {
                     reel={reel}
                     index={index}
                     nextSymbols={nextSymbols[index]}
-                    lastItem={ index === currentSymbols.length - 1 }
+                    lastItem={index === currentSymbols.length - 1}
                 />))}
         </div>
     );

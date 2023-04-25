@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import { AppStore } from "./appStore";
+import {makeAutoObservable} from "mobx";
+import {AppStore} from "./appStore";
 
 export class SlotStore {
     appStore;
@@ -12,7 +12,7 @@ export class SlotStore {
     win = 0;
 
     constructor(appStore: AppStore) {
-        makeAutoObservable(this, {}, { autoBind: true });
+        makeAutoObservable(this, {}, {autoBind: true});
         this.appStore = appStore;
     }
 
@@ -53,7 +53,7 @@ export class SlotStore {
             for (let j = 1; j < checkLines.length; j++) {
                 const currentSymbol = checkLines[i][j];
                 if (winningSymbol === "wild") {
-                   winningSymbol = currentSymbol;
+                    winningSymbol = currentSymbol;
                 }
                 if (currentSymbol === winningSymbol || currentSymbol === "wild") {
                     count = count + 1;
@@ -97,7 +97,7 @@ export class SlotStore {
     }
 
     calculateWinAmount(symbol: string, count: number) {
-        const payouts: {[key: string]: number[]} = {
+        const payouts: { [key: string]: number[] } = {
             helmet: [0, 0, 1, 2, 5],
             pagoda: [0, 0, 1, 2, 5],
             sai: [0, 0, 1, 2, 5],
