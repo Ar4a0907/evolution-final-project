@@ -1,11 +1,19 @@
 import { makeAutoObservable } from "mobx";
 import React from "react";
 
+import { SlotStore } from "./slotStore";
+
+type AudioElements = {
+    [key: string]: HTMLAudioElement;
+};
+
 export class AppStore {
+    slotStore = new SlotStore(this);
     balance = 5000;
     bet = 0.25;
     outOfMoney = false;
     playSound = false;
+    audioElements: AudioElements = {};
     private maxBet = 16;
     private minBet = 0.25;
 
@@ -25,16 +33,27 @@ export class AppStore {
         }
     }
 
+    incrementBalance(money: number) {
+        this.balance += money;
+    }
+
     makeSpin() {
         if (this.balance > this.bet) {
             this.balance -= this.bet;
+            this.slotStore.spin();
         } else {
             this.outOfMoney = true;
         }
     }
 
     toggleSound() {
-       this.playSound = !this.playSound;
+        this.playSound = !this.playSound;
+    }
+
+    addAudioElements(ref: HTMLAudioElement) {
+        if (ref !== null) {
+            this.audioElements[ref.id] = ref;
+        }
     }
 }
 
