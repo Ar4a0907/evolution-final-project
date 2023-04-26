@@ -20,17 +20,15 @@ export const Reel: React.FC<ReelProps> = observer((props) => {
     const { slotStore, audioElements } = useAppStore();
     const reelRef = useRef<HTMLDivElement>(null);
 
-    const playSound = () => {
-        audioElements[REEL_SPIN_END_ID].play();
-    };
-
     useEffect(() => {
         const reelRefCurrent = reelRef.current;
+        const playSound = () => {
+            audioElements[REEL_SPIN_END_ID].play();
+        };
 
         if (reelRefCurrent !== null && lastItem) {
             reelRefCurrent.addEventListener("animationend", slotStore.onAnimationEnd);
         }
-
         reelRefCurrent?.addEventListener("animationend", playSound);
 
         return () => {
@@ -39,7 +37,7 @@ export const Reel: React.FC<ReelProps> = observer((props) => {
             }
             reelRefCurrent?.removeEventListener("animationend", playSound);
         };
-    });
+    }, [lastItem, slotStore.onAnimationEnd, audioElements]);
 
     return (
         <div
