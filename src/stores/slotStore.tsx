@@ -76,7 +76,7 @@ export class SlotStore {
 
     checkIfBigWin() {
         //To check big win faster, change if statement to if (this.win >= this.appStore.bet * 1)
-        if (this.win >= this.appStore.bet * 1) {
+        if (this.win >= this.appStore.bet * 20) {
             this.bigWin = true;
         } else {
             this.bigWin = false;

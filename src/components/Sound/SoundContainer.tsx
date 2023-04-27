@@ -33,7 +33,6 @@ export const SoundContainer: React.FC = observer(() => {
     }, [backgroundMusicElement, playSound]);
 
     useEffect(() => {
-        console.log(slotStore.bigWin)
         if (slotStore.bigWin) {
             if (backgroundMusicElement.current !== null) {
                 backgroundMusicElement.current.volume = 0.01;
@@ -43,7 +42,7 @@ export const SoundContainer: React.FC = observer(() => {
                 backgroundMusicElement.current.volume = 0.3;
             }
         }
-    }, [slotStore.bigWin])
+    }, [slotStore.bigWin]);
 
     return (
         <div style={ { position: "fixed", top: -100, left: -100 } }>
