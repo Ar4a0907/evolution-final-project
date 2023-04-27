@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-import { AppStore } from "./appStore";
+import { appStore, AppStore } from "./appStore";
 
 
 export class SlotStore {
@@ -12,10 +12,15 @@ export class SlotStore {
     animationResolve: (() => void) | undefined = undefined;
     animationPromise: Promise<void> | undefined;
     win = 0;
+    bigWin: boolean = false;
 
     constructor(appStore: AppStore) {
         makeAutoObservable(this, {}, { autoBind: true });
         this.appStore = appStore;
+    }
+
+    closeBigWin() {
+        this.bigWin = false;
     }
 
     generateNewSymbols() {
@@ -69,6 +74,15 @@ export class SlotStore {
         this.win = win * this.appStore.bet;
     }
 
+    checkIfBigWin() {
+        //To check big win faster, change if statement to if (this.win >= this.appStore.bet * 1)
+        if (this.win >= this.appStore.bet * 1) {
+            this.bigWin = true;
+        } else {
+            this.bigWin = false;
+        }
+    }
+
     createCheckLines() {
         const lines = [];
         for (let i = 0; i < this.nextSymbols[0].length; i++) {
@@ -115,12 +129,18 @@ export class SlotStore {
     }
 
     onSpinStart() {
+        this.bigWin = false;
         this.isSpinning = true;
         this.win = 0;
+        appStore.hideWinBlocks();
     }
 
     onSpinEnd() {
         this.calculateWin();
+        this.checkIfBigWin();
+        if (this.win > 0) {
+            appStore.showWinBlocks();
+        }
         this.appStore.incrementBalance(this.win);
         this.currentSymbols = this.nextSymbols;
         this.nextSymbols = this.generateNewSymbols();

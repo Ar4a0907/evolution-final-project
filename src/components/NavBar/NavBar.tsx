@@ -15,7 +15,9 @@ export const NavBar: React.FC = () => {
             <LineCounter/>
             <SpinButton/>
             <WinCounter/>
-            <SoundButton/>
+            <div>
+                <SoundButton/>
+            </div>
         </div>
     );
 };

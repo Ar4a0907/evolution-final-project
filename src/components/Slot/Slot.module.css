@@ -7,4 +7,6 @@
     transform: translateX(-50%);
     overflow: hidden;
     height: 510px;
+    user-select: none;
+    pointer-events: none;
 }

@@ -10,3 +10,7 @@
     left: 0;
     color: #fff;
 }
+
+.NavBar div:last-of-type, .NavBar div:first-of-type {
+    width: 100px;
+}

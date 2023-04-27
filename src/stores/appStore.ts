@@ -14,11 +14,20 @@ export class AppStore {
     outOfMoney = false;
     playSound = false;
     audioElements: AudioElements = {};
+    isWinBlocksVisible = false;
     private maxBet = 16;
     private minBet = 0.25;
 
     constructor() {
         makeAutoObservable(this, {}, { autoBind: true });
+    }
+
+    hideWinBlocks() {
+        this.isWinBlocksVisible = false;
+    }
+
+    showWinBlocks() {
+        this.isWinBlocksVisible = true;
     }
 
     incrementBet() {
