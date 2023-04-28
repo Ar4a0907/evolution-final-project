@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# TypeScript course final project
+
+The project is a slot game in Japanese style.
+Applications have various sound effects and animations
+
+All images, icons, etc. are royalty free or created by AI.
+Most of the pictures for the game symbols were taken from [here](https://game-icons.net/)
+
+Also, music and sound effects are royalty free.
+All sound effects (except background music) were taken from [here](https://freesound.org/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Built with
+
+**[React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [MobX](https://mobx.js.org/README.html), CSS Modules**
 
 ## Available Scripts
 
@@ -39,8 +52,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## `npm run lint`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Runs the ESLint.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## `npm run lint:fix`
+
+Fixes all possible problems, which was found by ESLint.
