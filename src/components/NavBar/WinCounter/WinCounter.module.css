@@ -1,0 +1,11 @@
+.WinCounter {
+    background-color: rgb(16, 29, 52);
+    min-width: 100px;
+    padding: 5px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.WinCounter p {
+    text-align: center;
+}

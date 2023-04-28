@@ -1,0 +1,12 @@
+.Slot {
+    position: absolute;
+    display: flex;
+    column-gap: 30px;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    height: 510px;
+    user-select: none;
+    pointer-events: none;
+}
