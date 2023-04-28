@@ -11,12 +11,8 @@ export const SmallWin: React.FC = observer(() => {
     const { slotStore, isWinBlocksVisible, audioElements } = useAppStore();
 
     useEffect(() => {
-        const playSound = () => {
-            audioElements[SMALL_WIN_ID].play();
-        };
-
         if (isWinBlocksVisible && !slotStore.bigWin) {
-            playSound();
+            audioElements[SMALL_WIN_ID].play();
         }
     }, [isWinBlocksVisible, audioElements, slotStore.bigWin]);
 

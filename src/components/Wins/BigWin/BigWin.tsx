@@ -17,31 +17,28 @@ export const BigWin: React.FC = observer(() => {
     };
 
     useEffect(() => {
-        const playWinSound = () => {
+        if (isWinBlocksVisible && slotStore.bigWin) {
             audioElements[BIG_WIN_ID].currentTime = 0;
             audioElements[BIG_WIN_ID].play();
-        };
-
-        if (isWinBlocksVisible && slotStore.bigWin) {
-            playWinSound();
         }
     }, [isWinBlocksVisible, audioElements, slotStore.bigWin]);
 
-    if (slotStore.bigWin && isWinBlocksVisible) {
-        return (
-            <div onClick={handleClick} className={styles.BigWin}>
-                <div className={styles.textWrap}>
-                    <div className={[styles.text, styles.text1].join(" ")}>B</div>
-                    <div className={[styles.text, styles.text2].join(" ")}>I</div>
-                    <div className={[styles.text, styles.text3].join(" ")}>G</div>
-                    <br/>
-                    <div className={[styles.text, styles.text4].join(" ")}>W</div>
-                    <div className={[styles.text, styles.text1].join(" ")}>I</div>
-                    <div className={[styles.text, styles.text2].join(" ")}>N</div>
-                </div>
-                <h2>{transformBalance(slotStore.win)}</h2>
+    return (
+        <div
+            onClick={handleClick}
+            className={styles.BigWin}
+            style={{ visibility: isWinBlocksVisible && slotStore.bigWin ? "visible" : "hidden" }}
+        >
+            <div className={styles.textWrap}>
+                <div className={[styles.text, styles.text1].join(" ")}>B</div>
+                <div className={[styles.text, styles.text2].join(" ")}>I</div>
+                <div className={[styles.text, styles.text3].join(" ")}>G</div>
+                <br/>
+                <div className={[styles.text, styles.text4].join(" ")}>W</div>
+                <div className={[styles.text, styles.text1].join(" ")}>I</div>
+                <div className={[styles.text, styles.text2].join(" ")}>N</div>
             </div>
-        );
-    }
-    return null;
+            <h2>{transformBalance(slotStore.win)}</h2>
+        </div>
+    );
 });

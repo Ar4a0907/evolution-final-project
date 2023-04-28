@@ -33,14 +33,14 @@ export const SoundContainer: React.FC = observer(() => {
     }, [backgroundMusicElement, playSound]);
 
     useEffect(() => {
+        if (!backgroundMusicElement.current) {
+            return;
+        }
+
         if (slotStore.bigWin) {
-            if (backgroundMusicElement.current !== null) {
-                backgroundMusicElement.current.volume = 0.01;
-            }
+            backgroundMusicElement.current.volume = 0.01;
         } else {
-            if (backgroundMusicElement.current !== null) {
-                backgroundMusicElement.current.volume = 0.3;
-            }
+            backgroundMusicElement.current.volume = 0.3;
         }
     }, [slotStore.bigWin]);
 
